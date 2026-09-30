@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bhutan Student Hub</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    transition: 0.3s;
+}
+
+/* HEADER */
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: #2563eb;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* SECTIONS */
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* CARDS */
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 18px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+/* SUBJECT GRID */
+
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.subject {
+    background: #eef2ff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.subject:hover {
+    transform: scale(1.02);
+}
+
+/* BUTTON */
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* INPUT */
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* SEARCH */
+
+#searchBox {
+    margin-bottom: 15px;
+}
+
+/* QUIZ */
+
+.option {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    text-align: left;
+}
+
+/* FOOTER */
+
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* DARK MODE */
+
+.dark {
+    background: #111827;
+    color: white;
+}
+
+.dark .card {
+    background: #1f2937;
+}
+
+.dark .subject {
+    background: #374151;
+}
+
+.dark input {
+    background: #374151;
+    color: white;
+    border-color: #555;
+}
+
+/* MOBILE */
+
+@media(max-width:500px) {
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .subjects {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    nav button {
+        font-size: 13px;
+        margin: 3px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<h1>🇧🇹 Bhutan Student Hub</h1>
+
+<p>Learn • Revise • Practice</p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<button onclick="showSection('home')">🏠 Home</button>
+
+<button onclick="showSection('subjects')">📚 Subjects</button>
+
+<button onclick="showSection('calculator')">🧮 Calculator</button>
+
+<button onclick="showSection('quiz')">🧠 Quiz</button>
+
+<button onclick="showSection('planner')">📅 Planner</button>
+
+<button onclick="darkMode()">🌙</button>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- HOME -->
+
+<div id="home" class="section active">
+
+<div class="card">
+
+<h2>Welcome! 👋</h2>
+
+<p>
+Welcome to Bhutan Student Hub — a simple study website
+made for students.
+</p>
+
+<p>
+Use the tools below to revise, calculate marks and
+organize your study time.
+</p>
+
+<button onclick="showSection('subjects')">
+Explore Subjects →
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔥 Popular Tools</h2>
+
+<p>📚 Grade 9 Notes</p>
+
+<p>🧮 Percentage Calculator</p>
+
+<p>🧠 Quick Quiz</p>
+
+<p>📅 Study Planner</p>
+
+</div>
+
+</div>
+
+
+<!-- SUBJECTS -->
+
+<div id="subjects" class="section">
+
+<div class="card">
+
+<h2>📚 Subjects</h2>
+
+<input
+type="text"
+id="searchBox"
+placeholder="🔎 Search subjects..."
+onkeyup="searchSubjects()"
+>
+
+<div class="subjects">
+
+<div class="subject">
+<h3>⚡ Physics</h3>
+<p>Formulas & concepts</p>
+</div>
+
+<div class="subject">
+<h3>🧪 Chemistry</h3>
+<p>Elements & reactions</p>
+</div>
+
+<div class="subject">
+<h3>🧬 Biology</h3>
+<p>Life & organisms</p>
+</div>
+
+<div class="subject">
+<h3>🌍 Geography</h3>
+<p>Earth & environment</p>
+</div>
+
+<div class="subject">
+<h3>💰 Economics</h3>
+<p>Markets & money</p>
+</div>
+
+<div class="subject">
+<h3>💻 ICT</h3>
+<p>Technology & computers</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📖 Quick Revision</h2>
+
+<h3>Physics</h3>
+
+<p>
+Work done = Force × Distance
+</p>
+
+<p>
+SI unit of force = Newton (N)
+</p>
+
+<h3>Chemistry</h3>
+
+<p>
+An element contains only one type of atom.
+</p>
+
+<h3>Biology</h3>
+
+<p>
+The cell is the basic unit of life.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- CALCULATOR -->
+
+<div id="calculator" class="section">
+
+<div class="card">
+
+<h2>🧮 Marks Calculator</h2>
+
+<p>Enter your marks:</p>
+
+<input
+type="number"
+id="marks"
+placeholder="Marks obtained"
+>
+
+<input
+type="number"
+id="total"
+placeholder="Total marks"
+>
+
+<button onclick="calculateMarks()">
+Calculate
+</button>
+
+<h3 id="percentageResult"></h3>
+
+</div>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div id="quiz" class="section">
+
+<div class="card">
+
+<h2>🧠 Quick Quiz</h2>
+
+<p><b>Question 1:</b></p>
+
+<p>What is the SI unit of force?</p>
+
+<button class="option"
+onclick="checkAnswer(false)">
+A. Joule
+</button>
+
+<button class="option"
+onclick="checkAnswer(true)">
+B. Newton
+</button>
+
+<button class="option"
+onclick="checkAnswer(false)">
+C. Watt
+</button>
+
+<button class="option"
+onclick="checkAnswer(false)">
+D. Pascal
+</button>
+
+<h3 id="quizResult"></h3>
+
+</div>
+
+</div>
+
+
+<!-- PLANNER -->
+
+<div id="planner" class="section">
+
+<div class="card">
+
+<h2>📅 Study Planner</h2>
+
+<p>What do you want to study today?</p>
+
+<input
+type="text"
+id="studyTask"
+placeholder="Example: Revise Chemistry"
+>
+
+<button onclick="saveTask()">
+Save Task
+</button>
+
+<h3 id="taskResult"></h3>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>🇧🇹 Bhutan Student Hub</p>
+
+<p>Made for students</p>
+
+</footer>
+
+
+<script>
+
+/* SECTION SWITCHER */
+
+function showSection(sectionID) {
+
+    let sections =
+    document.querySelectorAll(".section");
+
+    sections.forEach(function(section) {
+
+        section.classList.remove("active");
+
+    });
+
+    document
+    .getElementById(sectionID)
+    .classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* DARK MODE */
+
+function darkMode() {
+
+    document.body.classList.toggle("dark");
+
+}
+
+
+/* MARKS CALCULATOR */
+
+function calculateMarks() {
+
+    let marks =
+    Number(document.getElementById("marks").value);
+
+    let total =
+    Number(document.getElementById("total").value);
+
+    if (marks < 0 || total <= 0 || marks > total) {
+
+        document.getElementById(
+            "percentageResult"
+        ).innerHTML =
+        "⚠️ Please enter valid marks.";
+
+        return;
+    }
+
+    let percentage =
+    (marks / total) * 100;
+
+    document.getElementById(
+        "percentageResult"
+    ).innerHTML =
+    "Your percentage: " +
+    percentage.toFixed(2) +
+    "% 🎯";
+
+}
+
+
+/* QUIZ */
+
+function checkAnswer(correct) {
+
+    if (correct) {
+
+        document.getElementById(
+            "quizResult"
+        ).innerHTML =
+        "✅ Correct! Great job!";
+
+    } else {
+
+        document.getElementById(
+            "quizResult"
+        ).innerHTML =
+        "❌ Try again!";
+
+    }
+
+}
+
+
+/* STUDY PLANNER */
+
+function saveTask() {
+
+    let task =
+    document.getElementById("studyTask").value;
+
+    if (task.trim() === "") {
+
+        document.getElementById(
+            "taskResult"
+        ).innerHTML =
+        "⚠️ Enter a study task.";
+
+        return;
+    }
+
+    document.getElementById(
+        "taskResult"
+    ).innerHTML =
+    "✅ Today's task: " + task;
+
+}
+
+
+/* SEARCH SUBJECTS */
+
+function searchSubjects() {
+
+    let input =
+    document.getElementById(
+        "searchBox"
+    ).value.toLowerCase();
+
+    let subjects =
+    document.querySelectorAll(
+        ".subject"
+    );
+
+    subjects.forEach(function(subject) {
+
+        let text =
+        subject.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+
+            subject.style.display = "block";
+
+        } else {
+
+            subject.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
